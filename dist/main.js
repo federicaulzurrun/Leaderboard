@@ -311,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\n  padding: 0;\n  margin: 0;\n  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -416,6 +416,84 @@ module.exports = function (cssWithMappingToString) {
   return list;
 };
 
+/***/ }),
+/* 11 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// class Score {
+//   constructor(id, name, score) {
+//     this.id = id;
+//     this.name = name;
+//     this.score = score;
+//   }
+
+//   /* data that overrides the API */
+//   scoreData = [
+//     {
+//       id: 1,
+//       name: 'Fede',
+//       score: 21,
+//     },
+//     {
+//       id: 1,
+//       name: 'Fran',
+//       score: 22,
+//     },
+//     {
+//       id: 1,
+//       name: 'Lu',
+//       score: 23,
+//     },
+//     {
+//       id: 1,
+//       name: 'Yiye',
+//       score: 24,
+//     },
+//   ]
+
+//   getScoreUser = () => {
+//     const scoreListContainer = document.getElementById('scoreList');
+//     scoreListContainer.innerHTML =
+// this.scoreData.map((e) => `<li class="score-item">${e.name} : ${e.score}</li>`).join('');
+//   }
+
+//   addingNewScore = ({ name, scoreNumber }) => {
+//     this.scoreData.push({
+//       id: this.scoreData.length + 1,
+//       name,
+//       score: scoreNumber,
+//     });
+//     this.getScoreUser();
+//   }
+// }
+
+class Score {
+  constructor() {
+    this.scoreData = [];
+  }
+
+  getScoreUser() {
+    const scoreListContainer = document.getElementById('scoreList');
+    scoreListContainer.innerHTML = this.scoreData.map((e) => `<li class="score-item">${e.name} : ${e.score}</li>`).join('');
+  }
+
+  addingNewScore(name, scoreNumber) {
+    const newScore = {
+      id: this.scoreData.length + 1,
+      name,
+      score: scoreNumber,
+    };
+    this.scoreData.push(newScore);
+    this.getScoreUser();
+  }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Score);
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -495,7 +573,33 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_score_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 
+
+
+const newScore = new _modules_score_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+const addScoreForm = document.querySelector('.addScoreForm');
+
+addScoreForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const nameInput = document.getElementById('name-input');
+  const scoreInput = document.getElementById('score-input');
+
+  const name = nameInput.value;
+  const scoreNumber = Number(scoreInput.value);
+
+  if (name && scoreNumber) {
+    newScore.addingNewScore(name, scoreNumber);
+
+    nameInput.value = '';
+    scoreInput.value = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  newScore.getScoreUser();
+});
 
 })();
 

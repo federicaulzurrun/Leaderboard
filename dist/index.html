@@ -3,9 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/6e8f4ae605.js" crossorigin="anonymous"></script>
   <title>LeaderBoard</title>
 <script defer src="main.js"></script></head>
 <body>
-  
+  <div class="title-container">
+    <h1 class="title">Leaderboard</h1>
+  </div>
+  <!--page development container-->
+  <div class="pageDevelop-container">
+    <div class="scores-container">
+      <div class="scoresTitle-container">
+        <h2 class="scoresTitle">Reccent scores</h2>
+        <button class="refresh btn" id="refresh"> Refresh</button>
+      </div>
+      <!--render table with JS-->
+      <ul class="score-list" id="scoreList">
+      </ul>
+    </div>
+
+    <!--UI add scores-->
+    <div class="addScore-container">
+      <div class="addScoreTitle-container">
+        <h2 class="addScoreTitle">Add your score</h2>
+      </div>
+      <form class="addScoreForm">
+        <input id="name-input" type="text" name="name" placeholder="Your name" required>
+        <input id="score-input" type="text" name="score" placeholder="Your Score" required>
+        <button type="submit" class="submit btn" id="submit">Submit</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
