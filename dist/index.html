@@ -15,10 +15,16 @@
     <div class="scores-container">
       <div class="scoresTitle-container">
         <h2 class="scoresTitle">Reccent scores</h2>
-        <button class="refresh btn" id="refresh"> Refresh</button>
+        <button type="button" class="refresh btn" id="refresh"> Refresh</button>
       </div>
       <!--render table with JS-->
       <ul class="score-list" id="scoreList">
+      </ul>
+      <ul class="list-hard">
+        <li>Federica : 35</li>
+        <li>Lucila : 20</li>
+        <li>Fran : 24</li>
+        <li>Yiye : 25</li>
       </ul>
     </div>
 
@@ -30,7 +36,9 @@
       <form class="addScoreForm">
         <input id="name-input" type="text" name="name" placeholder="Your name" required>
         <input id="score-input" type="text" name="score" placeholder="Your Score" required>
-        <button type="submit" class="submit btn" id="submit">Submit</button>
+        <div class="btnsubmit">
+          <button type="submit" class="submit btn" id="submit">Submit</button>
+        </div>
       </form>
     </div>
   </div>
