@@ -23,10 +23,10 @@
 
 
 
-# 📖 To Do List <a name="about-project"></a>
+# 📖 LeaderBoard <a name="about-project"></a>
 
 
-**To do list**  We created this project using a wireframe with plain JavaScript.
+**LeaderBoard**  We created this project using a wireframe with plain JavaScript.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -45,7 +45,7 @@ First i use HTML 5 thas it's markup languange used for structuring and presentin
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- <a href="N/A"> Visit the site!</a>
+- <p> N/A </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -70,7 +70,7 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 ```sh
-  git clone 
+  git clone https://github.com/federicaulzurrun/Leaderboard.git
 ```
 
 ### Install
