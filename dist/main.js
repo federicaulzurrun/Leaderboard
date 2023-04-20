@@ -424,74 +424,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// class Score {
-//   constructor(id, name, score) {
-//     this.id = id;
-//     this.name = name;
-//     this.score = score;
-//   }
-
-//   /* data that overrides the API */
-//   scoreData = [
-//     {
-//       id: 1,
-//       name: 'Fede',
-//       score: 21,
-//     },
-//     {
-//       id: 1,
-//       name: 'Fran',
-//       score: 22,
-//     },
-//     {
-//       id: 1,
-//       name: 'Lu',
-//       score: 23,
-//     },
-//     {
-//       id: 1,
-//       name: 'Yiye',
-//       score: 24,
-//     },
-//   ]
-
-//   getScoreUser = () => {
-//     const scoreListContainer = document.getElementById('scoreList');
-//     scoreListContainer.innerHTML =
-// this.scoreData.map((e) => `<li class="score-item">${e.name} : ${e.score}</li>`).join('');
-//   }
-
-//   addingNewScore = ({ name, scoreNumber }) => {
-//     this.scoreData.push({
-//       id: this.scoreData.length + 1,
-//       name,
-//       score: scoreNumber,
-//     });
-//     this.getScoreUser();
-//   }
-// }
-
+// define the class
 class Score {
-  constructor() {
-    this.scoreData = [];
+  constructor(user, score) {
+    // inicialize the user and score parameters
+    this.user = user;
+    this.score = score;
   }
 
+  /* define the API endpoint URL as a class property */
+  apiUrl = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/URWOPQXPpdyBILkLKoCv/scores/';
+
+  /* create an empty array to store the input data */
+  apiDataInput = [];
+
+  /* define a function to render the scores on the DOM */
   getScoreUser() {
     const scoreListContainer = document.getElementById('scoreList');
-    scoreListContainer.innerHTML = this.scoreData.map((e) => `<li class="score-item">${e.name} : ${e.score}</li>`).join('');
+    scoreListContainer.innerHTML = this.apiDataInput.map((e) => `<li class="score-item">${e.user} : ${e.score}</li>`).join('');
   }
 
-  addingNewScore(name, scoreNumber) {
-    const newScore = {
-      id: this.scoreData.length + 1,
-      name,
-      score: scoreNumber,
-    };
-    this.scoreData.push(newScore);
-    this.getScoreUser();
-  }
+  /* define an async function to fetch the score from the API */
+  fetchResults = async () => {
+    try {
+      const dataApi = await fetch(this.apiUrl);
+      const response = await dataApi.json();
+      this.apiDataInput = [];
+      response.result.map((e) => this.apiDataInput.push(e));
+      return this.getScoreUser();
+    } catch (err) {
+      return err;
+    }
+  };
+
+  /* define an async function to add new scores to the API */
+  addingNewScore = async ({ user, scoreNumber }) => {
+    try {
+      const configData = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, score: scoreNumber }),
+      };
+
+      const dataApi = await fetch(this.apiUrl, configData);
+      const response = await dataApi.json();
+      this.apiDataInput.push(response);
+      return this.fetchResults();
+    } catch (err) {
+      return err;
+    }
+  };
 }
 
+// export the score class
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Score);
 
 /***/ })
@@ -574,33 +561,41 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_score_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+// importing necessary modules and files
 
 
 
+// create a new Score object
 const newScore = new _modules_score_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+
+/* get the form and add an event listener for submitting new scores */
 const addScoreForm = document.querySelector('.addScoreForm');
 
 addScoreForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const nameInput = document.getElementById('name-input');
+  // get the input values for user and score
+  const userInput = document.getElementById('name-input');
   const scoreInput = document.getElementById('score-input');
 
-  const name = nameInput.value;
+  // store the input values in variables
+  const user = userInput.value;
   const scoreNumber = Number(scoreInput.value);
 
-  if (name && scoreNumber) {
-    newScore.addingNewScore(name, scoreNumber);
+  // if both inputs values are present, add the new score and reset the form
+  if (user && scoreNumber) {
+    newScore.addingNewScore({ user, scoreNumber });
 
-    nameInput.value = '';
+    userInput.value = '';
     scoreInput.value = '';
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  newScore.getScoreUser();
-});
-
+// get the refresh button and add an event listener to fect new score data
+const refreshBtn = document.getElementById('refresh');
+refreshBtn.addEventListener('click', newScore.fetchResults);
+// fetch the initial score data when the page is loaded
+document.addEventListener('DOMContentLoaded', newScore.getScoreUser);
 })();
 
 /******/ })()
