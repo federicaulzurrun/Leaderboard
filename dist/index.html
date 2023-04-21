@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/6e8f4ae605.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,900&display=swap" rel="stylesheet">
   <title>LeaderBoard</title>
 <script defer src="main.js"></script></head>
 <body>
@@ -15,8 +18,12 @@
     <div class="scores-container">
       <div class="scoresTitle-container">
         <h2 class="scoresTitle">Reccent scores</h2>
-        <button type="button" class="refresh btn" id="refresh"> Refresh</button>
-      </div>
+        <div class="refresh-cont">
+          <button type="button" class="refresh btn" id="refresh">
+            <p>Refresh</p>
+          </button>
+        </div>
+        </div>
       <!--render table with JS-->
       <ul class="score-list" id="scoreList">
       </ul>
@@ -27,13 +34,17 @@
       <div class="addScoreTitle-container">
         <h2 class="addScoreTitle">Add your score</h2>
       </div>
-      <form class="addScoreForm">
-        <input id="name-input" type="text" name="name" placeholder="Your name" required>
-        <input id="score-input" type="text" name="score" placeholder="Your Score" required>
+      <div class="form">
+        <form class="addScoreForm">
+          <input id="name-input" type="text" name="name" placeholder="Your name" required>
+          <input id="score-input" type="text" name="score" placeholder="Your Score" required>
+        </form>
         <div class="btnsubmit">
-          <button type="submit" class="submit btn" id="submit">Submit</button>
+          <button type="submit" class="submit btn" id="submit">
+            <p>Submit</p>
+          </button>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </body>
